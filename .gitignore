@@ -3,3 +3,6 @@
 notas.txt
 # archivo con observaciones antes de subir el proyecto completo
 todo.txt
+
+#archivo con las conexiones a la base de datos
+nodemon.json
