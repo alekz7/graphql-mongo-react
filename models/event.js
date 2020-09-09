@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const eventSchema = new Schema({
   title: {
     type: String,
-    require:true
+    required:true
   },
   description:{
     type: String,
@@ -16,6 +16,10 @@ const eventSchema = new Schema({
   date:{
     type: Date,
     required: true
+  },
+  creator:{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }
 });
 module.exports = mongoose.model('Event', eventSchema);
