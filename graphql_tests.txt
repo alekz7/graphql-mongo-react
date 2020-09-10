@@ -1,0 +1,90 @@
+# mutation{
+#   cancelBooking(bookingId:"5f5a5ff3d1de2d29cc61e54e"){
+#     title
+#     creator{
+#       email
+#     }
+#   }
+# }
+# mutation{
+#   bookEvent(eventId:"5f5919cf5416da2b4804262c"){
+#     _id
+#   }
+# }
+
+# mutation{
+#   bookEvent(eventId:"5f5907b839fcfb20ec18dbf5"){
+#     _id
+#     createdAt
+    
+#   }
+# }
+# mutation{
+#   createEvent(eventInput:{
+#     title:"this is a test",
+#     description:"usuario 2",
+#     price: 88.88,
+#     date:
+#   })
+# }
+# mutation{
+#   createUser(userInput:{
+#     email:"test@test.com"
+#   	password:"test"}) 
+#   {
+#     password
+#   }
+# }
+# query {
+#   events {
+#     title
+#     date
+#     creator {
+#       email
+#     }
+#   }
+# }
+# mutation{
+#   createEvent(
+#     eventInput: { 
+#       title:"another event three", description:"does this work?", price: 99.99, date: "2020-09-08T22:51:56.681Z" }){ 
+#     title
+#     description
+#     creator{
+#       email
+#     }
+#   }
+# }
+
+# query{
+#   events{
+#     creator{
+#       email      
+#      	createdEvents{
+#      	title
+#         creator{
+#           email
+#         }
+#      	} 
+#     }
+#   }
+# }
+# query{
+#   events{
+#     title
+#     description
+#     _id
+#   }
+# }
+# mutation{
+#   createEvent(eventInput: { title:"another event", description:"does this work?", price: 99.99, date: "2020-09-08T22:51:56.681Z" }){ 
+#     title
+#     description
+#   }
+# }
+# mutation{
+#   createUser(userInput:{email:"ing.aragon.ipn@gmail.com", password:"admin"}){
+#     email
+#     password    
+#   }
+# }

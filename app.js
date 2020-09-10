@@ -17,7 +17,8 @@ app.use('/graphql', graphqlHTTP({
 }));
 
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.jdrok.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`,{
-  useNewUrlParser:true
+  useNewUrlParser:true,
+  useUnifiedTopology: true
 })
   .then(()=>{
     console.log("conexion exitosa a mongodb");
