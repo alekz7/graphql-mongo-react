@@ -5,7 +5,7 @@ const bookingSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Event'
   },
-  creator:{
+  user:{
     type: Schema.Types.ObjectId,
     ref: 'User'
   }
