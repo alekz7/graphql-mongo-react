@@ -1,0 +1,7 @@
+{
+    "query": "query {login(email:\"test@test.com\", password: \"test\"){token}}"
+}
+
+{
+    "query": "mutation {createEvent(eventInput:{title: \"should work\", description: \"This now works!\", price:6.66, date:\"2020-09-11T02:12:25.246Z\"}) {_id title}}"
+}
