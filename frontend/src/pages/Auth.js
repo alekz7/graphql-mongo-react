@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './Auth.css';
+import AuthContext from '../context/auth-context';
 
 function AuthPage() {
 
+  const {token, userId, login} = useContext(AuthContext);
+    
   const[datos, setDatos] = useState({
     email: '',
     password: ''
   })
+
   const[isLogin, setIsLogin] = useState(true);
 
   const handleInputChange = (e) => {    
@@ -61,7 +65,13 @@ function AuthPage() {
       }
       return res.json();
     }).then(resData=>{
-      console.log(resData);
+      if(resData.data.login.token){
+        login(
+          resData.data.login.token,
+          resData.data.login.userId,          
+          resData.data.login.tokenExpiration
+        )        
+      }
     }).catch(err=>{
       console.log(err);
     })
@@ -79,8 +89,8 @@ function AuthPage() {
       </div>
       <div className="form-actions">
         <button type="submit">Submit</button>
-  <button type="button" onClick={handleModeSwitch}>Switch to {isLogin ? 'Signup' : 'Login'}</button>
-      </div>
+        <button type="button" onClick={handleModeSwitch}>Switch to {isLogin ? 'Signup' : 'Login'}</button>
+      </div>      
     </form>
   )
 }

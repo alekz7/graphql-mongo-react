@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { NavLink } from 'react-router-dom';
 import './Navigation.css';
+import AuthContext from '../../context/auth-context';
 
-function Navigation() {
+function Navigation() {  
+  const {token, userId, login} = useContext(AuthContext);  
   return (
     <header className="navigation">
       <div className="navigation__logo">
@@ -10,9 +12,9 @@ function Navigation() {
       </div>
       <nav className="navigation__items">
         <ul>
-          <li><NavLink to="/auth">Authenticate</NavLink></li>
+          {!token && <li><NavLink to="/auth">Authenticate </NavLink></li>}
           <li><NavLink to="/events">Events</NavLink></li>
-          <li><NavLink to="/bookings">Booking</NavLink></li>          
+          {token && <li><NavLink to="/bookings">Booking </NavLink></li>}
         </ul>
       </nav>
     </header>
