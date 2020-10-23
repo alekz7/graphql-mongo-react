@@ -1,10 +1,11 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom';
 import './Navigation.css';
-import AuthContext from '../../context/auth-context';
+import {AuthContext} from '../../context/auth-context';
 
 function Navigation() {  
-  const {token, userId, login} = useContext(AuthContext);  
+  const {tokenData, setTokenData} = useContext(AuthContext);  
+  const logout = ()=>{console.log("logout");}
   return (
     <header className="navigation">
       <div className="navigation__logo">
@@ -12,9 +13,13 @@ function Navigation() {
       </div>
       <nav className="navigation__items">
         <ul>
-          {!token && <li><NavLink to="/auth">Authenticate </NavLink></li>}
+          {!tokenData.token && <li><NavLink to="/auth">Authenticate </NavLink></li>}
           <li><NavLink to="/events">Events</NavLink></li>
-          {token && <li><NavLink to="/bookings">Booking </NavLink></li>}
+          {tokenData.token &&
+            <React.Fragment>
+              <li><NavLink to="/bookings">Booking </NavLink></li>
+              <li><button onClick={logout}>Logout</button></li>
+            </React.Fragment>}
         </ul>
       </nav>
     </header>

@@ -1,34 +1,35 @@
 import React, { useState, useContext } from 'react'
 import './Auth.css';
-import AuthContext from '../context/auth-context';
+import {AuthContext} from '../context/auth-context';
 
 function AuthPage() {
 
-  const {token, userId, login} = useContext(AuthContext);
-    
+  const {tokenData, setTokenData} = useContext(AuthContext);
+  const {isLogin, setIsLogin} = useContext(AuthContext);  
+  const {login} = useContext(AuthContext);  
+      
   const[datos, setDatos] = useState({
     email: '',
     password: ''
   })
 
-  const[isLogin, setIsLogin] = useState(true);
-
   const handleInputChange = (e) => {    
     setDatos({
       ...datos,
       [e.target.name] : e.target.value
-    })
+    });
   }
 
   const handleModeSwitch = (e) => {
     setIsLogin(!isLogin);
+    console.log(isLogin, datos);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if(datos.email.trim().length === 0 || datos.password.trim().length === 0){
       return;
-    }
+    }    
     let requestBody={
       query: `
         query {
@@ -51,7 +52,7 @@ function AuthPage() {
           }
         `
       };
-    }
+    }  
     
     fetch('http://localhost:8000/graphql',{
       method: 'POST',
@@ -64,7 +65,7 @@ function AuthPage() {
         throw new Error('Failed');
       }
       return res.json();
-    }).then(resData=>{
+    }).then(resData=>{      
       if(resData.data.login.token){
         login(
           resData.data.login.token,

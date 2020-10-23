@@ -40,4 +40,6 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PA
     console.log(err);
   })
 
-  app.listen(8000);
+  app.listen(8000,()=>{
+    console.log("aplicacion escuchando en el puerto 8000");
+  });
