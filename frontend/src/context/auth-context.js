@@ -11,10 +11,13 @@ const AuthContextProvider = (props) => {
   const login = (token, userId, tokenExpiration) => {
     setTokenData({...tokenData, token, userId})
   }
+  const logout = () => {
+    setTokenData({...tokenData, token:null, userId:null})
+  }
   const[isLogin, setIsLogin] = useState(true);
  
   return (
-    <AuthContext.Provider value={{ tokenData , setTokenData, isLogin, login:login}}>
+    <AuthContext.Provider value={{ tokenData , setTokenData, isLogin, login:login, logout:logout}}>
       {props.children}
     </AuthContext.Provider>
   );

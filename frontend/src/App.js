@@ -7,17 +7,7 @@ import BookingsPage from './pages/Bookings';
 import EventsPage from './pages/Events';
 import {AuthContext} from './context/auth-context';
 
-function App() {
-  // const [token, setToken]   = useState();
-  // const [userId, setUserId] = useState();
-  // const login = (token, userId, tokenExpiration) => {
-  //   setToken(token);
-  //   setUserId(userId);
-  // }
-  // const logout = () => {
-  //   setToken(null);
-  //   setUserId(null);
-  // }
+function App() {  
   const {tokenData, setTokenData} = useContext(AuthContext);  
   
   return (

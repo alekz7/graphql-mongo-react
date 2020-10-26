@@ -5,7 +5,7 @@ import {AuthContext} from '../../context/auth-context';
 
 function Navigation() {  
   const {tokenData, setTokenData} = useContext(AuthContext);  
-  const logout = ()=>{console.log("logout");}
+  const {logout} = useContext(AuthContext);
   return (
     <header className="navigation">
       <div className="navigation__logo">
