@@ -6,6 +6,7 @@ export const EventContext = createContext();
 const EventContextProvider = (props) => {
 
   const {tokenData, setTokenData} = useContext(AuthContext);
+  const {selectedEvent, setSelectedEvent} = useContext(AuthContext);
   const [creating, setCreating] = useState(false);
 
   const [event, setEvent] = useState({
@@ -31,6 +32,12 @@ const EventContextProvider = (props) => {
   const startCreateEventHandler = () => {
     setCreating(true);
   }
+  const modalCancelHandlerViewEventDetails = () => {
+    setSelectedEvent(null)
+  }
+  const modalConfirmHandlerViewEventDetails = () => {
+    //ignoring for now//
+  }  
   const modalCancelHandler = () => {
     setCreating(false);
   }
@@ -43,9 +50,7 @@ const EventContextProvider = (props) => {
       event.description.trim().length === 0
       ) return;
     const newEvent = event;
-    newEvent.price = +event.price; // casting to a number
-    console.log(newEvent);    
-    
+    newEvent.price = +event.price; // casting to a number    
     const requestBody = {
       query:`
         mutation {
@@ -55,10 +60,6 @@ const EventContextProvider = (props) => {
             description
             date
             price
-            creator{
-              _id
-              email
-            }
           }
         }
       `
@@ -79,7 +80,16 @@ const EventContextProvider = (props) => {
       }
       return res.json();
     }).then(resData=>{      
-      console.log(resData);
+      setEvents([...events,{
+        _id:resData.data.createEvent._id,
+        title:resData.data.createEvent.title,
+        description:resData.data.createEvent.description,
+        date:resData.data.createEvent.date,
+        price:resData.data.createEvent.price,
+        creator:{
+          _id: tokenData.userId
+        }
+      }])      
     }).catch(err=>{
       console.log(err);
     })
@@ -88,7 +98,9 @@ const EventContextProvider = (props) => {
   return (
     <EventContext.Provider value={{ creating, startCreateEventHandler, modalCancelHandler, modalConfirmHandler,
                                     event, handleChange, handleSubmit,
-                                    events, setEvents
+                                    events, setEvents,
+                                    modalCancelHandlerViewEventDetails,
+                                    modalConfirmHandlerViewEventDetails
                                     }}>
       {props.children}
     </EventContext.Provider>
