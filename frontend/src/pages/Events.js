@@ -65,7 +65,10 @@ function EventsPage() {
   return (
     <React.Fragment>
       {(creating || selectedEvent) && <Backdrop/>}
-      {creating && <Modal title="Add Event" canCancel canConfirm confirmText="Confirm">
+      {creating && <Modal title="Add Event" 
+        canCancel 
+        canConfirm 
+        confirmText={tokenData.token ? 'Book' : 'Confirm'}>
         <form>
           <div className="form-control">
             <label htmlFor="title">Title</label>
@@ -86,7 +89,10 @@ function EventsPage() {
         </form>
         </Modal>}
         {selectedEvent && 
-          <Modal title={selectedEvent.title} canCancelViewEventDetails canConfirmViewEventDetails confirmText="Book">
+          <Modal title={selectedEvent.title} 
+            canCancelViewEventDetails 
+            canConfirmViewEventDetails 
+            confirmText={tokenData.token ? 'Book' : 'Confirm'}>
           <h1>{selectedEvent.title}</h1>
           <h2> ${selectedEvent.price} - {new Date(selectedEvent.date).toLocaleDateString()}</h2>
           <p>{selectedEvent.description}</p>
