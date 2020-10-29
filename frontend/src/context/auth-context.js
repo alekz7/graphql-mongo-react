@@ -20,7 +20,7 @@ const AuthContextProvider = (props) => {
   const [selectedEvent, setSelectedEvent] = useState(null);
  
   return (
-    <AuthContext.Provider value={{ tokenData , setTokenData, isLogin, login:login, logout:logout, 
+    <AuthContext.Provider value={{ tokenData , setTokenData, isLogin, setIsLogin, login:login, logout:logout, 
                                     isLoading, setIsLoading,
                                     selectedEvent, setSelectedEvent
                                     }}>

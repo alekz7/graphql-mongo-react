@@ -22,7 +22,6 @@ function AuthPage() {
 
   const handleModeSwitch = (e) => {
     setIsLogin(!isLogin);
-    console.log(isLogin, datos);
   }
 
   const handleSubmit = (e) => {
@@ -32,25 +31,33 @@ function AuthPage() {
     }    
     let requestBody={
       query: `
-        query {
-          login(email: "${datos.email}", password:"${datos.password}"){
+        query Login($email: String!, $password: String!) {
+          login(email: $email, password: $password){
             userId
             token
             tokenExpiration
           }
         }      
-      `
+      `,
+      variables: {
+        email: datos.email,
+        password: datos.password
+      }
     }
     if(!isLogin){
       requestBody={
         query:`
-          mutation {
-            createUser(userInput: {email: "${datos.email}", password:"${datos.password}"} ){
+          mutation CreateUser($email: String!, $password: String!) {
+            createUser(userInput: {email: $email, password: $password} ){
               _id
               email
             }
           }
-        `
+        `,
+        variables:{
+          email : datos.email,
+          password : datos.password,
+        }
       };
     }  
     
@@ -65,7 +72,7 @@ function AuthPage() {
         throw new Error('Failed');
       }
       return res.json();
-    }).then(resData=>{      
+    }).then(resData=>{            
       if(resData.data.login.token){
         login(
           resData.data.login.token,
